@@ -1,7 +1,10 @@
 package com.google.spreadsheet.json.model;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class Conversation {
     private String id;
     private String title;

@@ -30,7 +30,6 @@ public class GoogleSheetToJsonUtil {
             return null;
         } else {
             List<Phonetic> phonetics = new ArrayList<>();
-            List<List<Object>> listRow = new ArrayList<List<Object>>();
             for (List row : values) {
                 if (ValidateDatatypeUtil.isBlankRow(row)) {
                     continue;

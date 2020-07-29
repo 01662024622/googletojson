@@ -1,13 +1,27 @@
 package com.google.spreadsheet.json.services.isobjectimpl;
 
+import com.google.spreadsheet.json.constants.objects.BasicQuizzeAnswerConstant;
 import com.google.spreadsheet.json.model.Answer;
 import com.google.spreadsheet.json.services.objectimpl.BasicQuizzeAnswerService;
+import com.google.spreadsheet.json.util.data.BasicQuizzeAnswerUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class BasicQuizzeAnswerServiceImpl implements BasicQuizzeAnswerService {
+public class BasicQuizzeAnswerServiceImpl extends BasicQuizzeAnswerService {
+
+    public BasicQuizzeAnswerServiceImpl(){
+        super(BasicQuizzeAnswerConstant.row);
+    }
+
     @Override
-    public List<Answer> getListFromResult() {
-        return null;
+    public List<Answer> getListFromResult(List<List<Object>> results) {
+        List<Answer> answers = new ArrayList<Answer>();
+        results.forEach((result)->{
+            if (!checkResultNull(result)) {
+                BasicQuizzeAnswerUtil.convertResultToBasicQuizzeAnswer(result);
+            }
+        });
+        return answers;
     }
 }

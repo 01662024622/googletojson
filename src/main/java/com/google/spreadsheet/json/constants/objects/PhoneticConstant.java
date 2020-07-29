@@ -12,5 +12,7 @@ public class PhoneticConstant {
     public static final int imageUrl = 4;
     public static final int audioUrl = 5;
     public static final int videoUrl = 6;
+    public static final int[] row = {id, title, type, howToSpeak, imageUrl, audioUrl, videoUrl};
+
 
 }

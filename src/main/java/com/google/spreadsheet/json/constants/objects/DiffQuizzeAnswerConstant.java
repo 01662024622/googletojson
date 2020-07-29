@@ -8,4 +8,6 @@ public class DiffQuizzeAnswerConstant {
     public static final int imageUrl = 39;
     public static final int audioUrl = 40;
     public static final int videoUrl = 41;
+    public static int[] row = {id, title, description, explain, imageUrl, audioUrl, videoUrl};
+
 }

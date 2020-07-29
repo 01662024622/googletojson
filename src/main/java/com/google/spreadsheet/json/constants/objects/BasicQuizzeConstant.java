@@ -8,4 +8,5 @@ public class BasicQuizzeConstant {
     public static final int imageUrl = 18;
     public static final int audioUrl = 19;
     public static final int videoUrl = 20;
+    public static final int[] row = {id,title,description,correctAnswerId,imageUrl,audioUrl,videoUrl};
 }
