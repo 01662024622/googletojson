@@ -6,6 +6,7 @@ import com.google.spreadsheet.json.constants.RangeConstant;
 import com.google.spreadsheet.json.exception.QTTTException;
 import com.google.spreadsheet.json.model.Example;
 import com.google.spreadsheet.json.model.Phonetic;
+import com.google.spreadsheet.json.services.isobjectimpl.PhoneticServiceImpl;
 import com.google.spreadsheet.json.util.validate.ValidateDatatypeUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Slf4j
 public class GoogleSheetToJsonUtil {
     public static List<Phonetic> getAllDataFromFile(Sheets sheetsService, String fileId) throws QTTTException {
+        PhoneticServiceImpl phoneticService = new PhoneticServiceImpl();
         String sheetName = RangeConstant.SHEET_NAME;
         String range = sheetName + RangeConstant.RANGE;
         ValueRange response;
@@ -29,13 +31,7 @@ public class GoogleSheetToJsonUtil {
             log.info("File " + sheetName + " No data found.");
             return null;
         } else {
-            List<Phonetic> phonetics = new ArrayList<>();
-            for (List row : values) {
-                if (ValidateDatatypeUtil.isBlankRow(row)) {
-                    continue;
-                }
-            }
-            return phonetics;
+            return phoneticService.getListFromResult(values);
         }
     }
 
