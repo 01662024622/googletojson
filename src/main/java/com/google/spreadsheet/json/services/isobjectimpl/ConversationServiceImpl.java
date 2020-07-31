@@ -1,5 +1,6 @@
 package com.google.spreadsheet.json.services.isobjectimpl;
 
+import com.google.spreadsheet.json.constants.objects.BasicQuizzeAnswerConstant;
 import com.google.spreadsheet.json.constants.objects.ConversationConstant;
 import com.google.spreadsheet.json.model.Answer;
 import com.google.spreadsheet.json.model.Conversation;
@@ -15,9 +16,6 @@ import java.util.List;
 
 public class ConversationServiceImpl extends ConversationService {
     private SentenceService sentenceService = new SentenceServiceImpl();
-    public ConversationServiceImpl(){
-        super(ConversationConstant.row);
-    }
 
     @Override
     public List<Conversation> getListFromResult(List<List<Object>> results) {
@@ -42,5 +40,17 @@ public class ConversationServiceImpl extends ConversationService {
         List<Sentence> sentences = sentenceService.getListFromResult(results);
         conversation.setSentences(sentences);
         return conversation;
+    }
+    private boolean checkResultNull(List<Object> result) {
+        int blankCell = 0;
+        int size = ConversationConstant.row.size();
+
+        for (int i = 0; i < size; i++) {
+            String value = result.get(ConversationConstant.row.get(i)).toString();
+            if (value.equals("null") || value.equals("")) {
+                blankCell++;
+            }
+        }
+        return blankCell == size;
     }
 }

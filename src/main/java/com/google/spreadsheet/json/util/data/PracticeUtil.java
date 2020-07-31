@@ -21,6 +21,10 @@ public class PracticeUtil {
                 list.add(value);
             }
         });
-        return (String[]) list.toArray();
+        String[] strings = new String[list.size()];
+        for (int j = 0; j < list.size(); j++){
+            strings[j]=list.get(j);
+        }
+        return strings;
     }
 }

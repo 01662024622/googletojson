@@ -1,5 +1,6 @@
 package com.google.spreadsheet.json.services.isobjectimpl;
 
+import com.google.spreadsheet.json.constants.objects.BasicQuizzeAnswerConstant;
 import com.google.spreadsheet.json.constants.objects.ExampleConstant;
 import com.google.spreadsheet.json.model.Example;
 import com.google.spreadsheet.json.services.objectimpl.ExampleService;
@@ -9,9 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExampleServiceImpl extends ExampleService {
-    public ExampleServiceImpl(){
-        super(ExampleConstant.row);
-    }
+
 
     @Override
     public List<Example> getListFromResult(List<List<Object>> results) {
@@ -22,5 +21,17 @@ public class ExampleServiceImpl extends ExampleService {
             }
         });
         return examples;
+    }
+    private boolean checkResultNull(List<Object> result) {
+        int blankCell = 0;
+        int size = ExampleConstant.row.size();
+
+        for (int i = 0; i < size; i++) {
+            String value = result.get(ExampleConstant.row.get(i)).toString();
+            if (value.equals("null") || value.equals("")) {
+                blankCell++;
+            }
+        }
+        return blankCell == size;
     }
 }

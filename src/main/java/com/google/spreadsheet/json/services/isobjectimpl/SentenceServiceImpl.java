@@ -10,11 +10,6 @@ import java.util.List;
 
 public class SentenceServiceImpl extends SentenceService {
 
-    public SentenceServiceImpl(){
-        super(SentenceConstant.row);
-    }
-
-
     @Override
     public List<Sentence> getListFromResult(List<List<Object>> results) {
         List<Sentence> sentences = new ArrayList<Sentence>();
@@ -24,6 +19,18 @@ public class SentenceServiceImpl extends SentenceService {
             }
         });
         return sentences;
+    }
+    private boolean checkResultNull(List<Object> result) {
+        int blankCell = 0;
+        int size = SentenceConstant.row.size();
+
+        for (int i = 0; i < size; i++) {
+            String value = result.get(SentenceConstant.row.get(i)).toString();
+            if (value.equals("null") || value.equals("")) {
+                blankCell++;
+            }
+        }
+        return blankCell == size;
     }
 
 }

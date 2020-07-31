@@ -10,10 +10,6 @@ import java.util.List;
 
 public class BasicQuizzeAnswerServiceImpl extends BasicQuizzeAnswerService {
 
-    public BasicQuizzeAnswerServiceImpl(){
-        super(BasicQuizzeAnswerConstant.row);
-    }
-
     @Override
     public List<Answer> getListFromResult(List<List<Object>> results) {
         List<Answer> answers = new ArrayList<Answer>();
@@ -23,5 +19,17 @@ public class BasicQuizzeAnswerServiceImpl extends BasicQuizzeAnswerService {
             }
         });
         return answers;
+    }
+    private boolean checkResultNull(List<Object> result) {
+        int blankCell = 0;
+        int size = BasicQuizzeAnswerConstant.row.size();
+
+        for (int i = 0; i < size; i++) {
+            String value = result.get(BasicQuizzeAnswerConstant.row.get(i)).toString();
+            if (value.equals("null") || value.equals("")) {
+                blankCell++;
+            }
+        }
+        return blankCell == size;
     }
 }
