@@ -15,7 +15,8 @@ public class BasicQuizzeAnswerServiceImpl extends BasicQuizzeAnswerService {
         List<Answer> answers = new ArrayList<Answer>();
         results.forEach((result)->{
             if (!checkResultNull(result)) {
-                BasicQuizzeAnswerUtil.convertResultToBasicQuizzeAnswer(result);
+                Answer answer = BasicQuizzeAnswerUtil.convertResultToBasicQuizzeAnswer(result);
+                answers.add(answer);
             }
         });
         return answers;

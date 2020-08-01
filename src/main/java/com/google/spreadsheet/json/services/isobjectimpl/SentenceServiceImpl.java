@@ -25,6 +25,7 @@ public class SentenceServiceImpl extends SentenceService {
         int size = SentenceConstant.row.size();
 
         for (int i = 0; i < size; i++) {
+            if (SentenceConstant.row.get(i)>=result.size()) continue;
             String value = result.get(SentenceConstant.row.get(i)).toString();
             if (value.equals("null") || value.equals("")) {
                 blankCell++;

@@ -7,14 +7,29 @@ import java.util.List;
 
 public class DiffQuizzeAnswerUtil {
     public static Answer convertResultToSentence(List<Object> result){
+        int size =  result.size();
         Answer answer = new Answer();
-        answer.setAudioUrl(result.get(DiffQuizzeAnswerConstant.audioUrl).toString());
-        answer.setDescription(result.get(DiffQuizzeAnswerConstant.description).toString());
-        answer.setExplain(result.get(DiffQuizzeAnswerConstant.explain).toString());
-        answer.setId(result.get(DiffQuizzeAnswerConstant.id).toString());
-        answer.setImageUrl(result.get(DiffQuizzeAnswerConstant.imageUrl).toString());
-        answer.setVideoUrl(result.get(DiffQuizzeAnswerConstant.videoUrl).toString());
-        answer.setTitle(result.get(DiffQuizzeAnswerConstant.title).toString());
+        if (DiffQuizzeAnswerConstant.audioUrl<size){
+            answer.setAudioUrl(result.get(DiffQuizzeAnswerConstant.audioUrl).toString());
+        }
+        if (DiffQuizzeAnswerConstant.description<size){
+            answer.setDescription(result.get(DiffQuizzeAnswerConstant.description).toString());
+        }
+        if (DiffQuizzeAnswerConstant.explain<size){
+            answer.setExplain(result.get(DiffQuizzeAnswerConstant.explain).toString());
+        }
+        if (DiffQuizzeAnswerConstant.id<size){
+            answer.setId(result.get(DiffQuizzeAnswerConstant.id).toString());
+        }
+        if (DiffQuizzeAnswerConstant.imageUrl<size){
+            answer.setImageUrl(result.get(DiffQuizzeAnswerConstant.imageUrl).toString());
+        }
+        if (DiffQuizzeAnswerConstant.videoUrl<size){
+            answer.setVideoUrl(result.get(DiffQuizzeAnswerConstant.videoUrl).toString());
+        }
+        if (DiffQuizzeAnswerConstant.title<size){
+            answer.setTitle(result.get(DiffQuizzeAnswerConstant.title).toString());
+        }
         return answer;
     }
 }

@@ -31,7 +31,6 @@ public class GoogleSheetToJsonUtil {
             log.info("File " + sheetName + " No data found.");
             return null;
         } else {
-            log.info("xxxxx"+String.valueOf(values.get(0).size()));
             return phoneticService.getListFromResult(values);
         }
     }

@@ -19,7 +19,8 @@ public class DiffQuizzeAnswerServiceImpl extends DiffQuizzeAnswerService {
         List<Answer> answers = new ArrayList<Answer>();
         results.forEach((result) -> {
             if (!checkResultNull(result)) {
-                DiffQuizzeAnswerUtil.convertResultToSentence(result);
+                Answer answer = DiffQuizzeAnswerUtil.convertResultToSentence(result);
+                answers.add(answer);
             }
         });
         return answers;
@@ -27,8 +28,8 @@ public class DiffQuizzeAnswerServiceImpl extends DiffQuizzeAnswerService {
     private boolean checkResultNull(List<Object> result) {
         int blankCell = 0;
         int size = DiffQuizzeAnswerConstant.row.size();
-        log.info("xxxxx"+String.valueOf(result.size()));
         for (int i = 0; i < size; i++) {
+            if (DiffQuizzeAnswerConstant.row.get(i)>=result.size()) continue;
             String value = result.get(DiffQuizzeAnswerConstant.row.get(i)).toString();
             if (value.equals("null") || value.equals("")) {
                 blankCell++;

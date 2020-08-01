@@ -1,19 +1,16 @@
 package com.google.spreadsheet.json.services.isobjectimpl;
 
-import com.google.spreadsheet.json.constants.objects.BasicQuizzeAnswerConstant;
 import com.google.spreadsheet.json.constants.objects.PhoneticConstant;
-import com.google.spreadsheet.json.constants.objects.PracticeConstant;
-import com.google.spreadsheet.json.model.DiffQuizze;
-import com.google.spreadsheet.json.model.Example;
 import com.google.spreadsheet.json.model.Phonetic;
-import com.google.spreadsheet.json.model.Practice;
 import com.google.spreadsheet.json.services.objectimpl.ExampleService;
 import com.google.spreadsheet.json.services.objectimpl.PhoneticService;
-import com.google.spreadsheet.json.util.data.PracticeUtil;
+import com.google.spreadsheet.json.util.data.PhoneticUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class PhoneticServiceImpl extends PhoneticService {
     ExampleService exampleService = new ExampleServiceImpl();
     PracticeServiceImpl practiceService =new PracticeServiceImpl();
@@ -39,18 +36,21 @@ public class PhoneticServiceImpl extends PhoneticService {
     }
 
     private Phonetic getData(List<List<Object>> results) {
-        Phonetic phonetic = new Phonetic();
+        log.info(results.toString());
+        Phonetic phonetic = PhoneticUtil.convertResultToPhonetic(results.get(0));
         phonetic.setExamples(exampleService.getListFromResult(results));
         phonetic.setPractice(practiceService.getData(results));
         return phonetic;
     }
+
     private boolean checkResultNull(List<Object> result) {
+        if (result.size()==0) return false;
         int blankCell = 0;
         int size = PhoneticConstant.row.size();
 
         for (int i = 0; i < size; i++) {
             String value = result.get(PhoneticConstant.row.get(i)).toString();
-            if (value.equals("null") || value.equals("")) {
+            if (value.equals("null") || value.equals("")||value.equals(" ")) {
                 blankCell++;
             }
         }

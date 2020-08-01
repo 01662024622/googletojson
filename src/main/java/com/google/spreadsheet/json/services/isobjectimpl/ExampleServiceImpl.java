@@ -15,11 +15,12 @@ public class ExampleServiceImpl extends ExampleService {
     @Override
     public List<Example> getListFromResult(List<List<Object>> results) {
         List<Example> examples = new ArrayList<Example>();
-        results.forEach((result)->{
+        for (List<Object> result: results){
+            if (result.size()==0) continue;
             if (!checkResultNull(result)){
                 examples.add(ExampleUtil.convertResultToExample(result));
             }
-        });
+        }
         return examples;
     }
     private boolean checkResultNull(List<Object> result) {
